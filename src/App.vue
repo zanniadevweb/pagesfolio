@@ -40,7 +40,7 @@
               />
 
               <h3 class="text-h3">
-                Try Vuetify + Vite
+                Try again Vuetify + Vite
               </h3>
 
               <p class="mt-4 text-medium-emphasis">
