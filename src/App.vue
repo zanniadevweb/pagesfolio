@@ -10,7 +10,7 @@
               rounded="0"
             />
 
-            Vuetify 3
+            Vuetify 3...+ VITE
           </div>
         </v-app-bar-title>
 

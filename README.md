@@ -1,4 +1,4 @@
-# [My official portfolio](zanniadevweb.github.io/pagesfolio/)
+# [My official portfolio](https://zanniadevweb.github.io/pagesfolio/)
 
 **Pagesfolio** is built over [Vite](https://vitejs.dev/guide/), [Vuetify 3](https://vuetifyjs.com/) and [Vuejs 3](https://vuejs.org/). It was based upon [Vite Theme Free](https://store.vuetifyjs.com/products/vite-theme-free) from Vuetify official website.
 
@@ -77,8 +77,7 @@ on:
     branches: ['main']
 
   # Allows you to run this workflow manually from the Actions tab
-  # -> Optionnal but possible to decommment this job right below
-  # workflow_dispatch:
+  workflow_dispatch:
 
 # Sets the GITHUB_TOKEN permissions to allow deployment to GitHub Pages
 permissions:
@@ -129,11 +128,18 @@ jobs:
         uses: actions/deploy-pages@v1
 ```
 
-- Now, you need to do the follow to push your code automatically:
+- All previous instructions can be now ignored if updating code.
+- Type usual commands any time you wish to push new code:
 ```sh
 git add .
 git commit -m "my message"
 git push
 ```
 
-- Upon push, wait for the job to finish and your site is really live on!
+- Wait for all the queued job to finish (Actions > All workflows)
+- Still in 'Actions' menu, click on 'Deploy' submenu.
+- There should a blue background text.
+- It is written : 'This workflow has a worflow_dispatch event trigger'
+- Click 'Run workflow' button right to this text.
+- Wait until this job deployment is finished.
+- Your site will really be live on now !
