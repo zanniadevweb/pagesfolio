@@ -152,7 +152,7 @@
               <v-col cols="auto">
                 <v-responsive width="350">
                   <h2 class="text-h4">
-                    The most complete version yet
+                    Skills
                   </h2>
 
                   <p class="text-success mt-3">
@@ -170,6 +170,10 @@
                   <v-btn class="mt-6">
                     More Information
                   </v-btn>
+                </v-responsive>
+                <v-responsive width="100%">
+                  <div id="canvasContainer"></div>
+                  <canvas id="threedeeCanvas"></canvas>
                 </v-responsive>
               </v-col>
 
@@ -241,6 +245,103 @@
   </v-app>
 </template>
 
-<script setup>
-  //
+<script>
+  import { defineComponent } from 'vue'
+  import * as THREE from 'three'
+  export default defineComponent({
+    mounted () {
+      const threedeeCanvas = document.getElementById('threedeeCanvas')
+      const textureCanvas = new THREE.TextureLoader().load('figma.jpg')
+      const materialCanvas = new THREE.MeshLambertMaterial(
+        {
+          map: textureCanvas,
+        }
+      )
+      const textureVue = new THREE.TextureLoader().load('vue.jpg')
+      const materialVue = new THREE.MeshLambertMaterial(
+        {
+          map: textureVue,
+        }
+      )
+      // MeshStandardMaterial,  MeshNormalMaterial, MeshPhongMaterial, MeshLambertMaterial or LineBasicMaterial
+
+      // Create an empty scene
+      const scene = new THREE.Scene()
+
+      // Create a basic perspective camera
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
+      camera.position.z = 5
+
+      // Create a renderer with Antialiasing
+      const renderer = new THREE.WebGLRenderer({ alpha: true, canvas: threedeeCanvas })
+
+      // Configure renderer clear color
+      // renderer.setClearColor("#000000")
+      renderer.setClearColor(0x000000, 0) // Fond transparent
+
+      // Configure renderer size
+      renderer.setSize(window.innerWidth, window.innerHeight)
+
+      // Append Renderer to DOM
+      document.getElementById('canvasContainer').appendChild(renderer.domElement)
+
+      // const geometry1 = new THREE.IcosahedronGeometry()
+      // const icosahedron = new THREE.Mesh(geometry1, material)
+      // icosahedron.position.set(-2.5, 0, 0)
+      // scene.add(icosahedron)
+
+      ;(function () {
+        // add a ambient light
+        const light1 = new THREE.AmbientLight(0x020202)
+
+        scene.add(light1)
+        // add a light in front
+        const light2 = new THREE.DirectionalLight('white', 1)
+        light2.position.set(0.5, 0.5, 2)
+        scene.add(light2)
+        // add a light behind
+        const light3 = new THREE.DirectionalLight('white', 0.75)
+        light3.position.set(-0.5, 2.5, -2)
+        scene.add(light3)
+      })()
+
+      const geometry = new THREE.BoxGeometry(1, 1, 1)
+      const cubeCanvas = new THREE.Mesh(geometry, materialCanvas)
+      cubeCanvas.position.set(-2.5, 0, 0)
+      scene.add(cubeCanvas)
+
+      const cubeVue = new THREE.Mesh(geometry, materialVue)
+      cubeVue.position.set(0, 0, 0)
+      scene.add(cubeVue)
+
+      // Render Loop
+      const render = function () {
+        requestAnimationFrame(render)
+
+        cubeCanvas.rotation.x += 0.005
+        cubeCanvas.rotation.y += 0.005
+        cubeVue.rotation.x += 0.005
+        cubeVue.rotation.y += 0.005
+        // icosahedron.rotation.x += 0.005
+        // icosahedron.rotation.y += 0.005
+
+        // Render the scene
+        renderer.render(scene, camera)
+      }
+
+      render()
+    },
+  })
 </script>
+
+<!-- background: linear-gradient(to bottom, #201c2f 0%, #100751 100%); -->
+<style>
+  #threedeeCanvas {
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+</style>
