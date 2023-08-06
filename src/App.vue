@@ -52,6 +52,9 @@
               <h3 class="text-h3 text-uppercase">
                 Applications Web
               </h3>
+              <h3 class="text-h3 text-uppercase">
+                App. Mobile
+              </h3>
 
               <p class="mt-4 text-medium-emphasis">
                 This is a basic Vuetify 3 application designed to help get your feet wet with the next version of the framework. Visit our <a href="https://vuetifyjs.com/" target="_blank" rel="noopener noreferrer">documentation</a> for more information.
@@ -249,9 +252,17 @@
         <div>
           Copyright &copy; 2016-{{ (new Date()).getFullYear() }} Vuetify, LLC
         </div>
-
-        <v-icon icon="$vuetify" size="x-large" />
       </v-container>
+      <v-container class="text-overline d-flex align-center justify-space-between">
+        <v-input>
+          <input id="myInput" type="text" value="zannialexandre@outlook.fr" size="4" style="text-align: center; width: 300px;">
+        </v-input>
+        <v-btn-alt prepend-icon="mdi-email"
+          text="Copier"
+          @click="copyTextFromInput"
+        />
+      </v-container>
+      <v-icon icon="$vuetify" size="x-large" />
     </v-footer>
   </v-app>
 </template>
@@ -259,8 +270,17 @@
 <script>
   import { defineComponent } from 'vue'
   import * as THREE from 'three'
+  import { aliases, mdi } from 'vuetify/iconsets/mdi'
 
+  // https://pictogrammers.github.io/@mdi/font/1.1.34/
   export default defineComponent({
+    icons: {
+      defaultSet: 'mdi',
+      aliases,
+      sets: {
+        mdi,
+      },
+    },
     mounted () {
       const threedeeCanvas = document.getElementById('threedeeCanvas')
 
@@ -271,12 +291,12 @@
       const imgHtmlcss = 'https://upload.wikimedia.org/wikipedia/commons/1/10/CSS3_and_HTML5_logos_and_wordmarks.svg'
       const imgPhp = 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/PHP-logo.svg/2560px-PHP-logo.svg.png'
 
-      const materialVue = this.log(imgVue)
-      const materialFigma = this.log(imgFigma)
-      const materialWordpress = this.log(imgWordpress)
-      const materialJavascript = this.log(imgJavascript)
-      const materialHtmlcss = this.log(imgHtmlcss)
-      const materialPhp = this.log(imgPhp)
+      const materialVue = this.loadTexture(imgVue)
+      const materialFigma = this.loadTexture(imgFigma)
+      const materialWordpress = this.loadTexture(imgWordpress)
+      const materialJavascript = this.loadTexture(imgJavascript)
+      const materialHtmlcss = this.loadTexture(imgHtmlcss)
+      const materialPhp = this.loadTexture(imgPhp)
 
       // Create an empty scene
       const scene = new THREE.Scene()
@@ -342,11 +362,6 @@
       const objects = []
       objects.push(cubeFigma, cubeVue, cubeWordpress, cubeJavascript, cubeHtmlcss, cubePhp)
 
-      for (let j = 0; j < objects.length; j++) {
-        objects[j].rotation.x += Math.sin(Date.now() * 0.01) * Math.PI * 0.0005
-        objects[j].rotation.y += Math.sin(Date.now() * 0.001) * Math.PI * 0.0005
-      }
-
       // Render Loop
       const render = function () {
         requestAnimationFrame(render)
@@ -363,7 +378,7 @@
       render()
     },
     methods: {
-      log (textureUrl) {
+      loadTexture (textureUrl) {
         // MeshStandardMaterial,  MeshNormalMaterial, MeshPhongMaterial, MeshLambertMaterial or LineBasicMaterial
         const loader = new THREE.TextureLoader()
         const numberFacesObject = 6
@@ -376,6 +391,13 @@
           }
         }
         return materialArray
+      },
+      copyTextFromInput () {
+        const copyText = document.getElementById('myInput')
+        copyText.select()
+        copyText.setSelectionRange(0, 99999) // For mobile devices
+        document.execCommand('copy')
+        alert('Copied the text: ' + copyText.value)
       },
     },
   })
