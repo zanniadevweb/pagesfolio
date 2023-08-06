@@ -25,6 +25,7 @@ git clone https://github.com/zanniadevweb/pagesfolio.git
 ```sh
 cd pagesfolio
 ```
+- Change 'base' parameter in vite.config.js file by the name of your repo.
 
 ## Project Setup
 

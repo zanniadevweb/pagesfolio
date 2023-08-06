@@ -10,7 +10,7 @@
               rounded="0"
             />
 
-            Vuetify 3...+ VITE
+            Alexandre ZANNI
           </div>
         </v-app-bar-title>
 
@@ -30,8 +30,9 @@
       <section id="hero">
         <v-sheet
           class="d-flex align-center pb-16"
-          color="grey-darken-3"
+          color="#181818"
         >
+        <v-parallax src="https://cdn.vuetifyjs.com/images/parallax/material.jpg">
           <v-container class="text-center">
             <v-responsive class="mx-auto" width="500">
               <v-img
@@ -39,8 +40,17 @@
                 height="400"
               />
 
-              <h3 class="text-h3">
-                Try again Vuetify + Vite
+              <h3 class="text-h3 text-uppercase">
+                Développeur
+              </h3>
+              <h3 class="text-h3 text-uppercase">
+                Sites Internet
+              </h3>
+              <h3 class="text-h3 text-uppercase">
+                E-Commerce
+              </h3>
+              <h3 class="text-h3 text-uppercase">
+                Applications Web
               </h3>
 
               <p class="mt-4 text-medium-emphasis">
@@ -48,6 +58,7 @@
               </p>
             </v-responsive>
           </v-container>
+          </v-parallax>
         </v-sheet>
       </section>
 
@@ -248,22 +259,24 @@
 <script>
   import { defineComponent } from 'vue'
   import * as THREE from 'three'
+
   export default defineComponent({
     mounted () {
       const threedeeCanvas = document.getElementById('threedeeCanvas')
-      const textureCanvas = new THREE.TextureLoader().load('figma.jpg')
-      const materialCanvas = new THREE.MeshLambertMaterial(
-        {
-          map: textureCanvas,
-        }
-      )
-      const textureVue = new THREE.TextureLoader().load('vue.jpg')
-      const materialVue = new THREE.MeshLambertMaterial(
-        {
-          map: textureVue,
-        }
-      )
-      // MeshStandardMaterial,  MeshNormalMaterial, MeshPhongMaterial, MeshLambertMaterial or LineBasicMaterial
+
+      const imgFigma = 'https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg'
+      const imgVue = 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/768px-Vue.js_Logo_2.svg.png?20170919082558'
+      const imgWordpress = 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Wordpress-Logo.svg/2048px-Wordpress-Logo.svg.png'
+      const imgJavascript = 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/2048px-Unofficial_JavaScript_logo_2.svg.png'
+      const imgHtmlcss = 'https://upload.wikimedia.org/wikipedia/commons/1/10/CSS3_and_HTML5_logos_and_wordmarks.svg'
+      const imgPhp = 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/PHP-logo.svg/2560px-PHP-logo.svg.png'
+
+      const materialVue = this.log(imgVue)
+      const materialFigma = this.log(imgFigma)
+      const materialWordpress = this.log(imgWordpress)
+      const materialJavascript = this.log(imgJavascript)
+      const materialHtmlcss = this.log(imgHtmlcss)
+      const materialPhp = this.log(imgPhp)
 
       // Create an empty scene
       const scene = new THREE.Scene()
@@ -285,11 +298,6 @@
       // Append Renderer to DOM
       document.getElementById('canvasContainer').appendChild(renderer.domElement)
 
-      // const geometry1 = new THREE.IcosahedronGeometry()
-      // const icosahedron = new THREE.Mesh(geometry1, material)
-      // icosahedron.position.set(-2.5, 0, 0)
-      // scene.add(icosahedron)
-
       ;(function () {
         // add a ambient light
         const light1 = new THREE.AmbientLight(0x020202)
@@ -305,31 +313,70 @@
         scene.add(light3)
       })()
 
-      const geometry = new THREE.BoxGeometry(1, 1, 1)
-      const cubeCanvas = new THREE.Mesh(geometry, materialCanvas)
-      cubeCanvas.position.set(-2.5, 0, 0)
-      scene.add(cubeCanvas)
+      const geometryCube = new THREE.BoxGeometry(1, 1, 1)
 
-      const cubeVue = new THREE.Mesh(geometry, materialVue)
-      cubeVue.position.set(0, 0, 0)
+      const cubeFigma = new THREE.Mesh(geometryCube, materialFigma)
+      cubeFigma.position.set(-2.5, 0, 0)
+      scene.add(cubeFigma)
+
+      const cubeVue = new THREE.Mesh(geometryCube, materialVue)
+      cubeVue.position.set(0, 2.5, 0)
       scene.add(cubeVue)
+
+      const cubeWordpress = new THREE.Mesh(geometryCube, materialWordpress)
+      cubeWordpress.position.set(-2.5, 2.5, 0)
+      scene.add(cubeWordpress)
+
+      const cubeJavascript = new THREE.Mesh(geometryCube, materialJavascript)
+      cubeJavascript.position.set(2.5, 0, 0)
+      scene.add(cubeJavascript)
+
+      const cubeHtmlcss = new THREE.Mesh(geometryCube, materialHtmlcss)
+      cubeHtmlcss.position.set(0, 0, 0)
+      scene.add(cubeHtmlcss)
+
+      const cubePhp = new THREE.Mesh(geometryCube, materialPhp)
+      cubePhp.position.set(2.5, 2.5, 0)
+      scene.add(cubePhp)
+
+      const objects = []
+      objects.push(cubeFigma, cubeVue, cubeWordpress, cubeJavascript, cubeHtmlcss, cubePhp)
+
+      for (let j = 0; j < objects.length; j++) {
+        objects[j].rotation.x += Math.sin(Date.now() * 0.01) * Math.PI * 0.0005
+        objects[j].rotation.y += Math.sin(Date.now() * 0.001) * Math.PI * 0.0005
+      }
 
       // Render Loop
       const render = function () {
         requestAnimationFrame(render)
 
-        cubeCanvas.rotation.x += 0.005
-        cubeCanvas.rotation.y += 0.005
-        cubeVue.rotation.x += 0.005
-        cubeVue.rotation.y += 0.005
-        // icosahedron.rotation.x += 0.005
-        // icosahedron.rotation.y += 0.005
+        for (let k = 0; k < objects.length; k++) {
+          objects[k].rotation.x += Math.sin(Date.now() * 0.01) * Math.PI * 0.0005
+          objects[k].rotation.y += Math.sin(Date.now() * 0.001) * Math.PI * 0.0005
+        }
 
         // Render the scene
         renderer.render(scene, camera)
       }
 
       render()
+    },
+    methods: {
+      log (textureUrl) {
+        // MeshStandardMaterial,  MeshNormalMaterial, MeshPhongMaterial, MeshLambertMaterial or LineBasicMaterial
+        const loader = new THREE.TextureLoader()
+        const numberFacesObject = 6
+        const materialArray = []
+        for (let i = 1; i <= numberFacesObject; i++) {
+          if (i === 5) {
+            materialArray.push(new THREE.MeshBasicMaterial({ color: 0xffffff, map: loader.load(textureUrl) }))
+          } else {
+            materialArray.push(new THREE.MeshNormalMaterial({ color: 'black' }))
+          }
+        }
+        return materialArray
+      },
     },
   })
 </script>
