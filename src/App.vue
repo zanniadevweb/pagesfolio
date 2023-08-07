@@ -4,21 +4,14 @@
       <v-container class="d-flex align-center py-0">
         <v-app-bar-title class="pl-0">
           <div class="d-flex align-center">
-            <v-avatar
-              class="me-3"
-              image="https://cdn.vuetifyjs.com/docs/images/logos/v.png"
-              rounded="0"
-            />
-
             Alexandre ZANNI
           </div>
         </v-app-bar-title>
 
-        <v-spacer />
-
         <input type="text" value="zannialexandre@outlook.fr" size="4" style="text-align: center; width: 300px;">
 
-        <v-btn-alt prepend-icon="mdi-email"
+        <v-btn-alt
+          prepend-icon="mdi-email"
           text="Copier E-mail"
           @click="copyTextFromInput"
         />
@@ -26,11 +19,12 @@
         <v-spacer />
 
         <v-btn-alt
+          prepend-icon="mdi-linkedin"
           append-icon="mdi-open-in-new"
-          href="https://vuetifyjs.com/components/all/"
+          href="https://www.linkedin.com/in/alexandre-zanni-232884187"
           rel="noopener noreferrer"
           target="_blank"
-          text="Vuetify Documentation"
+          text="Linkedin"
         />
       </v-container>
     </v-app-bar>
@@ -41,99 +35,115 @@
           class="d-flex align-center pb-16"
           color="#181818"
         >
-        <v-parallax src="https://cdn.vuetifyjs.com/images/parallax/material.jpg">
-          <v-container class="text-center">
-            <v-responsive class="mx-auto" width="500">
-              <v-img
-                src="https://cdn.vuetifyjs.com/docs/images/logos/v.png"
-                height="400"
-              />
+          <v-parallax src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg">
+            <v-container class="text-center">
+              <v-responsive class="mx-auto" width="500">
+                <v-img
+                  src="https://cdn.vuetifyjs.com/docs/images/logos/v.png"
+                  height="400"
+                />
 
-              <v-container class="text-center">
-                <h2 class="text-h3 text-uppercase text-black font-weight-black text-decoration-overline">
-                  Développeur
-                </h2>
-              </v-container>
-              <v-container class="text-center">
-                <h2 class="text-h3 text-uppercase text-black font-weight-bold text-decoration-overline">
-                  Sites Internet
-                </h2>
-                <h2 class="text-h3 text-uppercase text-black font-weight-bold">
-                  E-Commerce
-                </h2>
-                <h2 class="text-h3 text-uppercase text-black font-weight-bold">
-                  Applications Web
-                </h2>
-                <h2 class="text-h3 text-uppercase text-black font-weight-bold">
-                  Mobile Friendly
-                </h2>
-              </v-container>
+                <v-parallax color="red" src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg" class="rounded-card">
+                  <v-container class="text-center">
+                    <h2 class="text-h3 text-uppercase text-white font-weight-black stroke-text-black">
+                      Développeur
+                    </h2>
+                  </v-container>
+                  <v-container class="text-center">
+                    <h2 class="text-h3 text-uppercase text-white font-weight-bold text-decoration-overline stroke-text-black">
+                      Sites Internet
+                    </h2>
+                    <h2 class="text-h3 text-uppercase text-white font-weight-bold stroke-text-black">
+                      E-Commerce
+                    </h2>
+                    <h2 class="text-h3 text-uppercase text-white font-weight-bold stroke-text-black">
+                      Applications Web
+                    </h2>
+                    <h2 class="text-h3 text-uppercase text-white font-weight-bold stroke-text-black">
+                      Mobile Friendly
+                    </h2>
+                  </v-container>
+                </v-parallax>
 
-              <p class="mt-4 text-medium-emphasis">
-                This is a basic Vuetify 3 application designed to help get your feet wet with the next version of the framework. Visit our <a href="https://vuetifyjs.com/" target="_blank" rel="noopener noreferrer">documentation</a> for more information.
-              </p>
-            </v-responsive>
-          </v-container>
+                <p class="mt-4 text-black font-weight-bold">
+                  Alexandre ZANNI offre des services de freelance en tant que
+                  Développeur Web. Envoyez un mail via le bouton 'Copier E-mail'.
+                  Cliquez sur le lien ci-contre pour
+                  <a href="mailto:zannialexandre@outlook.fr" rel="noopener noreferrer" class="mt-4 text-orange-lighten-5">
+                    ouvrir la messagerie de votre choix</a>.
+                </p>
+
+              </v-responsive>
+            </v-container>
           </v-parallax>
         </v-sheet>
       </section>
 
       <v-sheet class="py-16">
-        <section id="filter">
+
+        <section id="grid">
           <v-container>
             <v-row justify="space-between">
               <v-col cols="auto">
-                <v-responsive width="350">
+                <v-responsive width="100%">
                   <h2 class="text-h4">
-                    New customization system
+                    Mes compétences
                   </h2>
 
-                  <p class="text-success mt-3">
-                    Global Defaults
-                  </p>
-
-                  <strong class="mt-3">
-                    Version 3 Only
-                  </strong>
-
-                  <p class="mt-8">
-                    Vuetify 3 has an unprecedented level of customization options that make implementing any design system easy.
-                  </p>
-
-                  <p class="mt-8">
-                    Assign default values for all components in the library, including nested support.
-                  </p>
-
-                  <v-btn
-                    class="mt-6"
-                    href="https://vuetifyjs.com/features/global-configuration/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    More Information
-                  </v-btn>
+                  <div id="container">
+                    <span id="text1" />
+                    <span id="text2" />
+                  </div>
+                  <svg id="filters">
+                    <defs>
+                      <filter id="threshold">
+                        <feColorMatrix
+                          in="SourceGraphic"
+                          type="matrix"
+                          values="1 0 0 0 0
+                              0 1 0 0 0
+                              0 0 1 0 0
+                              0 0 0 255 -140"
+                        />
+                      </filter>
+                    </defs>
+                  </svg>
                 </v-responsive>
+                <v-responsive width="100%">
+                  <div id="canvasContainer" />
+                  <canvas id="threedeeCanvas" />
+                </v-responsive>
+                <p class="mt-3">
+                  Design : Figma, Adobe Photoshop, Adobe Illustrator...
+                </p>
+                <p class="mt-3">
+                  Front-End : HTML / CSS, Javascript, Vue.js...
+                </p>
+                <p class="mt-3">
+                  Back-End : SQL, PHP, Symfony, Laravel...
+                </p>
+                <p class="mt-3">
+                  Supports : Desktop & Mobile friendly
+                </p>
+                <p class="mt-3">
+                  SEO : Naturel, comme le référencement !
+                </p>
               </v-col>
-
-              <v-img
-                max-width="400"
-                src="https://cdn.vuetifyjs.com/store/themes/vite-free/chips-bar.png"
-              />
             </v-row>
           </v-container>
         </section>
 
-        <v-container>
+        <!-- <v-container>
           <v-divider class="my-12" />
-        </v-container>
+        </v-container> -->
 
-        <section id="controls">
+        <!-- <section id="controls">
           <v-container>
             <v-row justify="space-between">
               <v-col cols="auto">
                 <v-responsive width="350">
                   <h2 class="text-h4">
-                    Rebuilt from the ground up
+                    Pour tous vos projets
                   </h2>
 
                   <p class="text-success mt-3">
@@ -167,57 +177,14 @@
               />
             </v-row>
           </v-container>
-        </section>
-
-        <v-container>
-          <v-divider class="my-12" />
-        </v-container>
-
-        <section id="grid">
-          <v-container>
-            <v-row justify="space-between">
-              <v-col cols="auto">
-                <v-responsive width="350">
-                  <h2 class="text-h4">
-                    Skills
-                  </h2>
-
-                  <p class="text-success mt-3">
-                    Available now!
-                  </p>
-
-                  <p class="mt-3">
-                    The latest version is here. Use one of our free themes to get a head start!
-                  </p>
-
-                  <p class="mt-8">
-                    This theme is designed to demonstrate a basic single page application using Vuetify 3.
-                  </p>
-
-                  <v-btn class="mt-6">
-                    More Information
-                  </v-btn>
-                </v-responsive>
-                <v-responsive width="100%">
-                  <div id="canvasContainer"></div>
-                  <canvas id="threedeeCanvas"></canvas>
-                </v-responsive>
-              </v-col>
-
-              <v-img
-                max-width="400"
-                src="https://cdn.vuetifyjs.com/store/themes/vite-free/layout.png"
-              />
-            </v-row>
-          </v-container>
-        </section>
+        </section> -->
       </v-sheet>
 
       <v-sheet
         class="py-16"
         color="#181818"
       >
-        <section id="grid">
+        <!-- <section id="grid">
           <v-container>
             <v-row justify="space-between">
               <v-col cols="auto">
@@ -226,7 +193,7 @@
                   width="350"
                 >
                   <h2 class="text-h4">
-                    Shape the future of Vuetify
+                    Pour tous vos projets
                   </h2>
 
                   <p class="text-success mt-3">
@@ -256,21 +223,22 @@
               />
             </v-row>
           </v-container>
-        </section>
+        </section> -->
       </v-sheet>
     </v-main>
 
     <v-footer>
       <v-container class="text-overline d-flex align-center justify-space-between">
         <div>
-          Copyright &copy; 2016-{{ (new Date()).getFullYear() }} Vuetify, LLC
+          Copyright &copy; {{ (new Date()).getFullYear() }} Alexandre ZANNI
         </div>
       </v-container>
       <v-container class="text-overline d-flex align-center justify-space-between">
         <v-input>
           <input id="myInput" type="text" value="zannialexandre@outlook.fr" size="4" style="text-align: center; width: 300px;">
         </v-input>
-        <v-btn-alt prepend-icon="mdi-email"
+        <v-btn-alt
+          prepend-icon="mdi-email"
           text="Copier E-mail"
           @click="copyTextFromInput"
         />
@@ -295,33 +263,124 @@
       },
     },
     mounted () {
+      const elts = {
+        text1: document.getElementById('text1'),
+        text2: document.getElementById('text2'),
+      }
+
+      const texts = [
+        'WordPress',
+        'Magento',
+        'PHP',
+        'HTML',
+        'CSS',
+        'Javascript',
+        'SQL',
+        'Python',
+        'Figma',
+        'Photoshop',
+        'Illustrator',
+        'SEO',
+        'Bootstrap',
+        'Vuetify',
+        'Vue.js',
+        'Symfony',
+        'Laravel',
+      ]
+
+      const morphTime = 1
+      const cooldownTime = 0.25
+
+      let textIndex = texts.length - 1
+      let time = new Date()
+      let morph = 0
+      let cooldown = cooldownTime
+
+      elts.text1.textContent = texts[textIndex % texts.length]
+      elts.text2.textContent = texts[(textIndex + 1) % texts.length]
+
+      function doMorph () {
+        morph -= cooldown
+        cooldown = 0
+
+        let fraction = morph / morphTime
+
+        if (fraction > 1) {
+          cooldown = cooldownTime
+          fraction = 1
+        }
+
+        setMorph(fraction)
+      }
+
+      function setMorph (fraction) {
+        elts.text2.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`
+        elts.text2.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`
+
+        fraction = 1 - fraction
+        elts.text1.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`
+        elts.text1.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`
+
+        elts.text1.textContent = texts[textIndex % texts.length]
+        elts.text2.textContent = texts[(textIndex + 1) % texts.length]
+      }
+
+      function doCooldown () {
+        morph = 0
+
+        elts.text2.style.filter = ''
+        elts.text2.style.opacity = '100%'
+
+        elts.text1.style.filter = ''
+        elts.text1.style.opacity = '0%'
+      }
+
+      function animate () {
+        requestAnimationFrame(animate)
+
+        const newTime = new Date()
+        const shouldIncrementIndex = cooldown > 0
+        const dt = (newTime - time) / 1000
+        time = newTime
+
+        cooldown -= dt
+
+        if (cooldown <= 0) {
+          if (shouldIncrementIndex) {
+            textIndex++
+          }
+
+          doMorph()
+        } else {
+          doCooldown()
+        }
+      }
+
+      animate()
+
+      // NEED TO SPLIT ALL THIS CODE INTO SEPARATE FUNCTIONS = CLEANER
+
       const threedeeCanvas = document.getElementById('threedeeCanvas')
 
       const imgWordpress = 'wordpress.png'
-      const imgMagento = 'magento.png'
+      const imgBootstrap = 'bootstrap.png'
       const imgFigma = 'figma.png'
       const imgPhp = 'php.png'
       const imgHtmlcss = 'htmlcss.png'
       const imgJavascript = 'javascript.png'
-      const imgVue = 'vue.png'
       const imgSymfony = 'symfony.png'
-      const imgLaravel = 'laravel.png'
-      const imgBootstrap = 'bootstrap.png'
+      const imgVue = 'vue.png'
       const imgSql = 'sql.png'
-      const imgPython = 'python.png'
 
       const materialWordpress = this.loadTexture(imgWordpress)
-      const materialMagento = this.loadTexture(imgMagento)
+      const materialBootstrap = this.loadTexture(imgBootstrap)
       const materialFigma = this.loadTexture(imgFigma)
       const materialHtmlcss = this.loadTexture(imgHtmlcss)
       const materialJavascript = this.loadTexture(imgJavascript)
       const materialPhp = this.loadTexture(imgPhp)
-      const materialVue = this.loadTexture(imgVue)
       const materialSymfony = this.loadTexture(imgSymfony)
-      const materialLaravel = this.loadTexture(imgLaravel)
-      const materialBootstrap = this.loadTexture(imgBootstrap)
+      const materialVue = this.loadTexture(imgVue)
       const materialSql = this.loadTexture(imgSql)
-      const materialPython = this.loadTexture(imgPython)
 
       // Create an empty scene
       const scene = new THREE.Scene()
@@ -364,9 +423,9 @@
       cubeWordpress.position.set(-2.5, 2.5, 0)
       scene.add(cubeWordpress)
 
-      const cubeMagento = new THREE.Mesh(geometryCube, materialMagento)
-      cubeMagento.position.set(0, 2.5, 0)
-      scene.add(cubeMagento)
+      const cubeBootstrap = new THREE.Mesh(geometryCube, materialBootstrap)
+      cubeBootstrap.position.set(0, 2.5, 0)
+      scene.add(cubeBootstrap)
 
       const cubeFigma = new THREE.Mesh(geometryCube, materialFigma)
       cubeFigma.position.set(2.5, 2.5, 0)
@@ -384,36 +443,23 @@
       cubeJavascript.position.set(2.5, 0, 0)
       scene.add(cubeJavascript)
 
-      const cubeVue = new THREE.Mesh(geometryCube, materialVue)
-      cubeVue.position.set(-2.5, -2.5, 0)
-      scene.add(cubeVue)
-
       const cubeSymfony = new THREE.Mesh(geometryCube, materialSymfony)
-      cubeSymfony.position.set(0, -2.5, 0)
+      cubeSymfony.position.set(-2.5, -2.5, 0)
       scene.add(cubeSymfony)
 
-      const cubeLaravel = new THREE.Mesh(geometryCube, materialLaravel)
-      cubeLaravel.position.set(2.5, -2.5, 0)
-      scene.add(cubeLaravel)
-
-      const cubeBootstrap = new THREE.Mesh(geometryCube, materialBootstrap)
-      cubeBootstrap.position.set(5, 2.5, 0)
-      scene.add(cubeBootstrap)
+      const cubeVue = new THREE.Mesh(geometryCube, materialVue)
+      cubeVue.position.set(0, -2.5, 0)
+      scene.add(cubeVue)
 
       const cubeSql = new THREE.Mesh(geometryCube, materialSql)
-      cubeSql.position.set(5, 0, 0)
+      cubeSql.position.set(2.5, -2.5, 0)
       scene.add(cubeSql)
-
-      const cubePython = new THREE.Mesh(geometryCube, materialPython)
-      cubePython.position.set(5, -2.5, 0)
-      scene.add(cubePython)
 
       const objects = []
       objects.push(
-        cubeWordpress, cubeMagento, cubeFigma,
+        cubeWordpress, cubeBootstrap, cubeFigma,
         cubePhp, cubeHtmlcss, cubeJavascript,
-        cubeVue, cubeSymfony, cubeLaravel,
-        cubeBootstrap, cubeSql, cubePython
+        cubeVue, cubeSymfony, cubeSql
       )
 
       // Render Loop
@@ -441,7 +487,7 @@
           if (i === 5) {
             materialArray.push(new THREE.MeshBasicMaterial({ color: 0xffffff, map: loader.load(textureUrl) }))
           } else {
-            materialArray.push(new THREE.MeshNormalMaterial({ color: 'black' }))
+            materialArray.push(new THREE.MeshNormalMaterial())
           }
         }
         return materialArray
@@ -468,3 +514,44 @@
     z-index: 1;
   }
 </style> -->
+<style>
+  @import url("https://fonts.googleapis.com/css?family=Raleway:900&display=swap");
+  .rounded-card{
+    border-radius:50px;
+  }
+  .stroke-text-black {
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+  }
+  .stroke-text-white {
+    -webkit-text-stroke-width: 0.1px;
+    -webkit-text-stroke-color: white;
+  }
+  body {
+      margin: 0px;
+  }
+  #container {
+      position: absolute;
+      margin: auto;
+      width: 100vw;
+      height: 80pt;
+      top: 0;
+      bottom: 0;
+      z-index: 99;
+
+      filter: url(#threshold) blur(0.6px);
+  }
+  #text1,
+  #text2 {
+      position: absolute;
+      width: 100%;
+      display: inline-block;
+
+      font-family: "Raleway", sans-serif;
+      font-size: 80pt;
+
+      text-align: center;
+
+      user-select: none;
+  }
+</style>
