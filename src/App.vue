@@ -16,6 +16,15 @@
 
         <v-spacer />
 
+        <input type="text" value="zannialexandre@outlook.fr" size="4" style="text-align: center; width: 300px;">
+
+        <v-btn-alt prepend-icon="mdi-email"
+          text="Copier E-mail"
+          @click="copyTextFromInput"
+        />
+
+        <v-spacer />
+
         <v-btn-alt
           append-icon="mdi-open-in-new"
           href="https://vuetifyjs.com/components/all/"
@@ -40,21 +49,25 @@
                 height="400"
               />
 
-              <h3 class="text-h3 text-uppercase">
-                Développeur
-              </h3>
-              <h3 class="text-h3 text-uppercase">
-                Sites Internet
-              </h3>
-              <h3 class="text-h3 text-uppercase">
-                E-Commerce
-              </h3>
-              <h3 class="text-h3 text-uppercase">
-                Applications Web
-              </h3>
-              <h3 class="text-h3 text-uppercase">
-                App. Mobile
-              </h3>
+              <v-container class="text-center">
+                <h2 class="text-h3 text-uppercase text-black font-weight-black text-decoration-overline">
+                  Développeur
+                </h2>
+              </v-container>
+              <v-container class="text-center">
+                <h2 class="text-h3 text-uppercase text-black font-weight-bold text-decoration-overline">
+                  Sites Internet
+                </h2>
+                <h2 class="text-h3 text-uppercase text-black font-weight-bold">
+                  E-Commerce
+                </h2>
+                <h2 class="text-h3 text-uppercase text-black font-weight-bold">
+                  Applications Web
+                </h2>
+                <h2 class="text-h3 text-uppercase text-black font-weight-bold">
+                  Mobile Friendly
+                </h2>
+              </v-container>
 
               <p class="mt-4 text-medium-emphasis">
                 This is a basic Vuetify 3 application designed to help get your feet wet with the next version of the framework. Visit our <a href="https://vuetifyjs.com/" target="_blank" rel="noopener noreferrer">documentation</a> for more information.
@@ -258,7 +271,7 @@
           <input id="myInput" type="text" value="zannialexandre@outlook.fr" size="4" style="text-align: center; width: 300px;">
         </v-input>
         <v-btn-alt prepend-icon="mdi-email"
-          text="Copier"
+          text="Copier E-mail"
           @click="copyTextFromInput"
         />
       </v-container>
@@ -284,19 +297,31 @@
     mounted () {
       const threedeeCanvas = document.getElementById('threedeeCanvas')
 
-      const imgFigma = 'https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg'
-      const imgVue = 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/768px-Vue.js_Logo_2.svg.png?20170919082558'
-      const imgWordpress = 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Wordpress-Logo.svg/2048px-Wordpress-Logo.svg.png'
-      const imgJavascript = 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/2048px-Unofficial_JavaScript_logo_2.svg.png'
-      const imgHtmlcss = 'https://upload.wikimedia.org/wikipedia/commons/1/10/CSS3_and_HTML5_logos_and_wordmarks.svg'
-      const imgPhp = 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/PHP-logo.svg/2560px-PHP-logo.svg.png'
+      const imgWordpress = 'wordpress.png'
+      const imgMagento = 'magento.png'
+      const imgFigma = 'figma.png'
+      const imgPhp = 'php.png'
+      const imgHtmlcss = 'htmlcss.png'
+      const imgJavascript = 'javascript.png'
+      const imgVue = 'vue.png'
+      const imgSymfony = 'symfony.png'
+      const imgLaravel = 'laravel.png'
+      const imgBootstrap = 'bootstrap.png'
+      const imgSql = 'sql.png'
+      const imgPython = 'python.png'
 
-      const materialVue = this.loadTexture(imgVue)
-      const materialFigma = this.loadTexture(imgFigma)
       const materialWordpress = this.loadTexture(imgWordpress)
-      const materialJavascript = this.loadTexture(imgJavascript)
+      const materialMagento = this.loadTexture(imgMagento)
+      const materialFigma = this.loadTexture(imgFigma)
       const materialHtmlcss = this.loadTexture(imgHtmlcss)
+      const materialJavascript = this.loadTexture(imgJavascript)
       const materialPhp = this.loadTexture(imgPhp)
+      const materialVue = this.loadTexture(imgVue)
+      const materialSymfony = this.loadTexture(imgSymfony)
+      const materialLaravel = this.loadTexture(imgLaravel)
+      const materialBootstrap = this.loadTexture(imgBootstrap)
+      const materialSql = this.loadTexture(imgSql)
+      const materialPython = this.loadTexture(imgPython)
 
       // Create an empty scene
       const scene = new THREE.Scene()
@@ -335,32 +360,61 @@
 
       const geometryCube = new THREE.BoxGeometry(1, 1, 1)
 
-      const cubeFigma = new THREE.Mesh(geometryCube, materialFigma)
-      cubeFigma.position.set(-2.5, 0, 0)
-      scene.add(cubeFigma)
-
-      const cubeVue = new THREE.Mesh(geometryCube, materialVue)
-      cubeVue.position.set(0, 2.5, 0)
-      scene.add(cubeVue)
-
       const cubeWordpress = new THREE.Mesh(geometryCube, materialWordpress)
       cubeWordpress.position.set(-2.5, 2.5, 0)
       scene.add(cubeWordpress)
 
-      const cubeJavascript = new THREE.Mesh(geometryCube, materialJavascript)
-      cubeJavascript.position.set(2.5, 0, 0)
-      scene.add(cubeJavascript)
+      const cubeMagento = new THREE.Mesh(geometryCube, materialMagento)
+      cubeMagento.position.set(0, 2.5, 0)
+      scene.add(cubeMagento)
+
+      const cubeFigma = new THREE.Mesh(geometryCube, materialFigma)
+      cubeFigma.position.set(2.5, 2.5, 0)
+      scene.add(cubeFigma)
+
+      const cubePhp = new THREE.Mesh(geometryCube, materialPhp)
+      cubePhp.position.set(-2.5, 0, 0)
+      scene.add(cubePhp)
 
       const cubeHtmlcss = new THREE.Mesh(geometryCube, materialHtmlcss)
       cubeHtmlcss.position.set(0, 0, 0)
       scene.add(cubeHtmlcss)
 
-      const cubePhp = new THREE.Mesh(geometryCube, materialPhp)
-      cubePhp.position.set(2.5, 2.5, 0)
-      scene.add(cubePhp)
+      const cubeJavascript = new THREE.Mesh(geometryCube, materialJavascript)
+      cubeJavascript.position.set(2.5, 0, 0)
+      scene.add(cubeJavascript)
+
+      const cubeVue = new THREE.Mesh(geometryCube, materialVue)
+      cubeVue.position.set(-2.5, -2.5, 0)
+      scene.add(cubeVue)
+
+      const cubeSymfony = new THREE.Mesh(geometryCube, materialSymfony)
+      cubeSymfony.position.set(0, -2.5, 0)
+      scene.add(cubeSymfony)
+
+      const cubeLaravel = new THREE.Mesh(geometryCube, materialLaravel)
+      cubeLaravel.position.set(2.5, -2.5, 0)
+      scene.add(cubeLaravel)
+
+      const cubeBootstrap = new THREE.Mesh(geometryCube, materialBootstrap)
+      cubeBootstrap.position.set(5, 2.5, 0)
+      scene.add(cubeBootstrap)
+
+      const cubeSql = new THREE.Mesh(geometryCube, materialSql)
+      cubeSql.position.set(5, 0, 0)
+      scene.add(cubeSql)
+
+      const cubePython = new THREE.Mesh(geometryCube, materialPython)
+      cubePython.position.set(5, -2.5, 0)
+      scene.add(cubePython)
 
       const objects = []
-      objects.push(cubeFigma, cubeVue, cubeWordpress, cubeJavascript, cubeHtmlcss, cubePhp)
+      objects.push(
+        cubeWordpress, cubeMagento, cubeFigma,
+        cubePhp, cubeHtmlcss, cubeJavascript,
+        cubeVue, cubeSymfony, cubeLaravel,
+        cubeBootstrap, cubeSql, cubePython
+      )
 
       // Render Loop
       const render = function () {
@@ -404,7 +458,7 @@
 </script>
 
 <!-- background: linear-gradient(to bottom, #201c2f 0%, #100751 100%); -->
-<style>
+<!-- <style>
   #threedeeCanvas {
     width: 100vw;
     height: 100vh;
@@ -413,4 +467,4 @@
     left: 0;
     z-index: 1;
   }
-</style>
+</style> -->
