@@ -3,7 +3,7 @@
     <v-app-bar>
       <v-container class="d-flex align-center py-0">
         <v-app-bar-title class="pl-0">
-          <div class="d-flex align-center">
+          <div class="d-flex align-center word">
             Alexandre ZANNI
           </div>
         </v-app-bar-title>
@@ -37,6 +37,7 @@
         >
           <v-parallax src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg">
             <v-container class="text-center">
+
               <v-responsive class="mx-auto" width="500">
                 <v-img
                   src="https://cdn.vuetifyjs.com/docs/images/logos/v.png"
@@ -65,13 +66,21 @@
                   </v-container>
                 </v-parallax>
 
-                <p class="mt-4 text-black font-weight-bold">
-                  Alexandre ZANNI offre des services de freelance en tant que
-                  Développeur Web. Envoyez un mail via le bouton 'Copier E-mail'.
-                  Cliquez sur le lien ci-contre pour
-                  <a href="mailto:zannialexandre@outlook.fr" rel="noopener noreferrer" class="mt-4 text-orange-lighten-5">
-                    ouvrir la messagerie de votre choix</a>.
-                </p>
+                <v-container class="text-center">
+                  <p class="mt-4 text-black font-weight-bold">
+                    Alexandre ZANNI offre des services de freelance en tant que
+                    Développeur Web. Envoyez un mail via le bouton :
+                  </p>
+                </v-container>
+                <v-container class="text-center">
+                  <v-btn
+                    color="rgb(var(--v-theme-primary)) !important"
+                    class="v-btn-plain text-black"
+                    prepend-icon="mdi-email"
+                    text="Copier E-mail"
+                    @click="copyTextFromInput"
+                  />
+                </v-container>
 
               </v-responsive>
             </v-container>
@@ -90,7 +99,7 @@
                     Mes compétences
                   </h2>
 
-                  <div id="container">
+                  <div id="containerAlternateText">
                     <span id="text1" />
                     <span id="text2" />
                   </div>
@@ -124,6 +133,9 @@
                 </p>
                 <p class="mt-3">
                   Supports : Desktop & Mobile friendly
+                </p>
+                <p class="mt-3">
+                  E-Commerce : WordPress, Magento
                 </p>
                 <p class="mt-3">
                   SEO : Naturel, comme le référencement !
@@ -263,221 +275,272 @@
       },
     },
     mounted () {
-      const elts = {
-        text1: document.getElementById('text1'),
-        text2: document.getElementById('text2'),
-      }
-
-      const texts = [
-        'WordPress',
-        'Magento',
-        'PHP',
-        'HTML',
-        'CSS',
-        'Javascript',
-        'SQL',
-        'Python',
-        'Figma',
-        'Photoshop',
-        'Illustrator',
-        'SEO',
-        'Bootstrap',
-        'Vuetify',
-        'Vue.js',
-        'Symfony',
-        'Laravel',
-      ]
-
-      const morphTime = 1
-      const cooldownTime = 0.25
-
-      let textIndex = texts.length - 1
-      let time = new Date()
-      let morph = 0
-      let cooldown = cooldownTime
-
-      elts.text1.textContent = texts[textIndex % texts.length]
-      elts.text2.textContent = texts[(textIndex + 1) % texts.length]
-
-      function doMorph () {
-        morph -= cooldown
-        cooldown = 0
-
-        let fraction = morph / morphTime
-
-        if (fraction > 1) {
-          cooldown = cooldownTime
-          fraction = 1
+      this.animateTypeWriter()
+      this.animateBlurryTextChange()
+      this.animateThreedCubes()
+    },
+    methods: {
+      animateTypeWriter () {
+        const words = ['Bonjour,', 'Mon nom', 'est ...', 'Alexandre', 'ZANNI']
+        let part = ''
+        let i = 0
+        let offset = 0
+        const len = words.length
+        let forwards = true
+        let skipCount = 0
+        const skipDelay = 15
+        const speed = 70
+        const wordflick = function () {
+          setInterval(function () {
+            if (forwards) {
+              if (offset >= words[i].length) {
+                ++skipCount
+                if (skipCount === skipDelay) {
+                  forwards = false
+                  skipCount = 0
+                }
+              }
+            } else {
+              if (offset === 0) {
+                forwards = true
+                i++
+                offset = 0
+                if (i >= len) {
+                  i = 0
+                }
+              }
+            }
+            part = words[i].substr(0, offset)
+            console.log(part)
+            if (skipCount === 0) {
+              if (forwards) {
+                offset++
+              } else {
+                offset--
+              }
+            }
+            document.querySelector('.word').textContent = part
+          }, speed)
         }
 
-        setMorph(fraction)
-      }
+        document.addEventListener('DOMContentLoaded', function () {
+          wordflick()
+        })
+      },
+      animateBlurryTextChange () {
+        const elts = {
+          text1: document.getElementById('text1'),
+          text2: document.getElementById('text2'),
+        }
 
-      function setMorph (fraction) {
-        elts.text2.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`
-        elts.text2.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`
+        const texts = [
+          'WordPress',
+          'Magento',
+          'PHP',
+          'HTML',
+          'CSS',
+          'Javascript',
+          'SQL',
+          'Python',
+          'Figma',
+          'Photoshop',
+          'Illustrator',
+          'SEO',
+          'Bootstrap',
+          'Vuetify',
+          'Vue.js',
+          'Symfony',
+          'Laravel',
+        ]
 
-        fraction = 1 - fraction
-        elts.text1.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`
-        elts.text1.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`
+        const morphTime = 1
+        const cooldownTime = 0.25
+
+        let textIndex = texts.length - 1
+        let time = new Date()
+        let morph = 0
+        let cooldown = cooldownTime
 
         elts.text1.textContent = texts[textIndex % texts.length]
         elts.text2.textContent = texts[(textIndex + 1) % texts.length]
-      }
 
-      function doCooldown () {
-        morph = 0
+        function doMorph () {
+          morph -= cooldown
+          cooldown = 0
 
-        elts.text2.style.filter = ''
-        elts.text2.style.opacity = '100%'
+          let fraction = morph / morphTime
 
-        elts.text1.style.filter = ''
-        elts.text1.style.opacity = '0%'
-      }
-
-      function animate () {
-        requestAnimationFrame(animate)
-
-        const newTime = new Date()
-        const shouldIncrementIndex = cooldown > 0
-        const dt = (newTime - time) / 1000
-        time = newTime
-
-        cooldown -= dt
-
-        if (cooldown <= 0) {
-          if (shouldIncrementIndex) {
-            textIndex++
+          if (fraction > 1) {
+            cooldown = cooldownTime
+            fraction = 1
           }
 
-          doMorph()
-        } else {
-          doCooldown()
-        }
-      }
-
-      animate()
-
-      // NEED TO SPLIT ALL THIS CODE INTO SEPARATE FUNCTIONS = CLEANER
-
-      const threedeeCanvas = document.getElementById('threedeeCanvas')
-
-      const imgWordpress = 'wordpress.png'
-      const imgBootstrap = 'bootstrap.png'
-      const imgFigma = 'figma.png'
-      const imgPhp = 'php.png'
-      const imgHtmlcss = 'htmlcss.png'
-      const imgJavascript = 'javascript.png'
-      const imgSymfony = 'symfony.png'
-      const imgVue = 'vue.png'
-      const imgSql = 'sql.png'
-
-      const materialWordpress = this.loadTexture(imgWordpress)
-      const materialBootstrap = this.loadTexture(imgBootstrap)
-      const materialFigma = this.loadTexture(imgFigma)
-      const materialHtmlcss = this.loadTexture(imgHtmlcss)
-      const materialJavascript = this.loadTexture(imgJavascript)
-      const materialPhp = this.loadTexture(imgPhp)
-      const materialSymfony = this.loadTexture(imgSymfony)
-      const materialVue = this.loadTexture(imgVue)
-      const materialSql = this.loadTexture(imgSql)
-
-      // Create an empty scene
-      const scene = new THREE.Scene()
-
-      // Create a basic perspective camera
-      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
-      camera.position.z = 5
-
-      // Create a renderer with Antialiasing
-      const renderer = new THREE.WebGLRenderer({ alpha: true, canvas: threedeeCanvas })
-
-      // Configure renderer clear color
-      // renderer.setClearColor("#000000")
-      renderer.setClearColor(0x000000, 0) // Fond transparent
-
-      // Configure renderer size
-      renderer.setSize(window.innerWidth, window.innerHeight)
-
-      // Append Renderer to DOM
-      document.getElementById('canvasContainer').appendChild(renderer.domElement)
-
-      ;(function () {
-        // add a ambient light
-        const light1 = new THREE.AmbientLight(0x020202)
-
-        scene.add(light1)
-        // add a light in front
-        const light2 = new THREE.DirectionalLight('white', 1)
-        light2.position.set(0.5, 0.5, 2)
-        scene.add(light2)
-        // add a light behind
-        const light3 = new THREE.DirectionalLight('white', 0.75)
-        light3.position.set(-0.5, 2.5, -2)
-        scene.add(light3)
-      })()
-
-      const geometryCube = new THREE.BoxGeometry(1, 1, 1)
-
-      const cubeWordpress = new THREE.Mesh(geometryCube, materialWordpress)
-      cubeWordpress.position.set(-2.5, 2.5, 0)
-      scene.add(cubeWordpress)
-
-      const cubeBootstrap = new THREE.Mesh(geometryCube, materialBootstrap)
-      cubeBootstrap.position.set(0, 2.5, 0)
-      scene.add(cubeBootstrap)
-
-      const cubeFigma = new THREE.Mesh(geometryCube, materialFigma)
-      cubeFigma.position.set(2.5, 2.5, 0)
-      scene.add(cubeFigma)
-
-      const cubePhp = new THREE.Mesh(geometryCube, materialPhp)
-      cubePhp.position.set(-2.5, 0, 0)
-      scene.add(cubePhp)
-
-      const cubeHtmlcss = new THREE.Mesh(geometryCube, materialHtmlcss)
-      cubeHtmlcss.position.set(0, 0, 0)
-      scene.add(cubeHtmlcss)
-
-      const cubeJavascript = new THREE.Mesh(geometryCube, materialJavascript)
-      cubeJavascript.position.set(2.5, 0, 0)
-      scene.add(cubeJavascript)
-
-      const cubeSymfony = new THREE.Mesh(geometryCube, materialSymfony)
-      cubeSymfony.position.set(-2.5, -2.5, 0)
-      scene.add(cubeSymfony)
-
-      const cubeVue = new THREE.Mesh(geometryCube, materialVue)
-      cubeVue.position.set(0, -2.5, 0)
-      scene.add(cubeVue)
-
-      const cubeSql = new THREE.Mesh(geometryCube, materialSql)
-      cubeSql.position.set(2.5, -2.5, 0)
-      scene.add(cubeSql)
-
-      const objects = []
-      objects.push(
-        cubeWordpress, cubeBootstrap, cubeFigma,
-        cubePhp, cubeHtmlcss, cubeJavascript,
-        cubeVue, cubeSymfony, cubeSql
-      )
-
-      // Render Loop
-      const render = function () {
-        requestAnimationFrame(render)
-
-        for (let k = 0; k < objects.length; k++) {
-          objects[k].rotation.x += Math.sin(Date.now() * 0.01) * Math.PI * 0.0005
-          objects[k].rotation.y += Math.sin(Date.now() * 0.001) * Math.PI * 0.0005
+          setMorph(fraction)
         }
 
-        // Render the scene
-        renderer.render(scene, camera)
-      }
+        function setMorph (fraction) {
+          elts.text2.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`
+          elts.text2.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`
 
-      render()
-    },
-    methods: {
+          fraction = 1 - fraction
+          elts.text1.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`
+          elts.text1.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`
+
+          elts.text1.textContent = texts[textIndex % texts.length]
+          elts.text2.textContent = texts[(textIndex + 1) % texts.length]
+        }
+
+        function doCooldown () {
+          morph = 0
+
+          elts.text2.style.filter = ''
+          elts.text2.style.opacity = '100%'
+
+          elts.text1.style.filter = ''
+          elts.text1.style.opacity = '0%'
+        }
+
+        function animate () {
+          requestAnimationFrame(animate)
+
+          const newTime = new Date()
+          const shouldIncrementIndex = cooldown > 0
+          const dt = (newTime - time) / 1000
+          time = newTime
+
+          cooldown -= dt
+
+          if (cooldown <= 0) {
+            if (shouldIncrementIndex) {
+              textIndex++
+            }
+
+            doMorph()
+          } else {
+            doCooldown()
+          }
+        }
+
+        animate()
+      },
+      animateThreedCubes () {
+        const threedeeCanvas = document.getElementById('threedeeCanvas')
+
+        const imgWordpress = 'wordpress.png'
+        const imgBootstrap = 'bootstrap.png'
+        const imgFigma = 'figma.png'
+        const imgPhp = 'php.png'
+        const imgHtmlcss = 'htmlcss.png'
+        const imgJavascript = 'javascript.png'
+        const imgSymfony = 'symfony.png'
+        const imgVue = 'vue.png'
+        const imgSql = 'sql.png'
+
+        const materialWordpress = this.loadTexture(imgWordpress)
+        const materialBootstrap = this.loadTexture(imgBootstrap)
+        const materialFigma = this.loadTexture(imgFigma)
+        const materialHtmlcss = this.loadTexture(imgHtmlcss)
+        const materialJavascript = this.loadTexture(imgJavascript)
+        const materialPhp = this.loadTexture(imgPhp)
+        const materialSymfony = this.loadTexture(imgSymfony)
+        const materialVue = this.loadTexture(imgVue)
+        const materialSql = this.loadTexture(imgSql)
+
+        // Create an empty scene
+        const scene = new THREE.Scene()
+
+        // Create a basic perspective camera
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
+        camera.position.z = 5
+
+        // Create a renderer with Antialiasing
+        const renderer = new THREE.WebGLRenderer({ alpha: true, canvas: threedeeCanvas })
+
+        // Configure renderer clear color
+        // renderer.setClearColor("#000000")
+        renderer.setClearColor(0x000000, 0) // Fond transparent
+
+        // Configure renderer size
+        renderer.setSize(window.innerWidth, window.innerHeight)
+
+        // Append Renderer to DOM
+        document.getElementById('canvasContainer').appendChild(renderer.domElement)
+
+        ;(function () {
+          // add a ambient light
+          const light1 = new THREE.AmbientLight(0x020202)
+
+          scene.add(light1)
+          // add a light in front
+          const light2 = new THREE.DirectionalLight('white', 1)
+          light2.position.set(0.5, 0.5, 2)
+          scene.add(light2)
+          // add a light behind
+          const light3 = new THREE.DirectionalLight('white', 0.75)
+          light3.position.set(-0.5, 2.5, -2)
+          scene.add(light3)
+        })()
+
+        const geometryCube = new THREE.BoxGeometry(1, 1, 1)
+
+        const cubeWordpress = new THREE.Mesh(geometryCube, materialWordpress)
+        cubeWordpress.position.set(-2.5, 2.5, 0)
+        scene.add(cubeWordpress)
+
+        const cubeBootstrap = new THREE.Mesh(geometryCube, materialBootstrap)
+        cubeBootstrap.position.set(0, 2.5, 0)
+        scene.add(cubeBootstrap)
+
+        const cubeFigma = new THREE.Mesh(geometryCube, materialFigma)
+        cubeFigma.position.set(2.5, 2.5, 0)
+        scene.add(cubeFigma)
+
+        const cubePhp = new THREE.Mesh(geometryCube, materialPhp)
+        cubePhp.position.set(-2.5, 0, 0)
+        scene.add(cubePhp)
+
+        const cubeHtmlcss = new THREE.Mesh(geometryCube, materialHtmlcss)
+        cubeHtmlcss.position.set(0, 0, 0)
+        scene.add(cubeHtmlcss)
+
+        const cubeJavascript = new THREE.Mesh(geometryCube, materialJavascript)
+        cubeJavascript.position.set(2.5, 0, 0)
+        scene.add(cubeJavascript)
+
+        const cubeSymfony = new THREE.Mesh(geometryCube, materialSymfony)
+        cubeSymfony.position.set(-2.5, -2.5, 0)
+        scene.add(cubeSymfony)
+
+        const cubeVue = new THREE.Mesh(geometryCube, materialVue)
+        cubeVue.position.set(0, -2.5, 0)
+        scene.add(cubeVue)
+
+        const cubeSql = new THREE.Mesh(geometryCube, materialSql)
+        cubeSql.position.set(2.5, -2.5, 0)
+        scene.add(cubeSql)
+
+        const objects = []
+        objects.push(
+          cubeWordpress, cubeBootstrap, cubeFigma,
+          cubePhp, cubeHtmlcss, cubeJavascript,
+          cubeVue, cubeSymfony, cubeSql
+        )
+
+        // Render Loop
+        const render = function () {
+          requestAnimationFrame(render)
+
+          for (let k = 0; k < objects.length; k++) {
+            objects[k].rotation.x += Math.sin(Date.now() * 0.01) * Math.PI * 0.0005
+            objects[k].rotation.y += Math.sin(Date.now() * 0.001) * Math.PI * 0.0005
+          }
+
+          // Render the scene
+          renderer.render(scene, camera)
+        }
+
+        render()
+      },
       loadTexture (textureUrl) {
         // MeshStandardMaterial,  MeshNormalMaterial, MeshPhongMaterial, MeshLambertMaterial or LineBasicMaterial
         const loader = new THREE.TextureLoader()
@@ -503,17 +566,7 @@
   })
 </script>
 
-<!-- background: linear-gradient(to bottom, #201c2f 0%, #100751 100%); -->
-<!-- <style>
-  #threedeeCanvas {
-    width: 100vw;
-    height: 100vh;
-    display: block;
-    top: 0;
-    left: 0;
-    z-index: 1;
-  }
-</style> -->
+<!-- gradient="to bottom, #201c2f 0%, #100751 100%" -->
 <style>
   @import url("https://fonts.googleapis.com/css?family=Raleway:900&display=swap");
   .rounded-card{
@@ -530,7 +583,7 @@
   body {
       margin: 0px;
   }
-  #container {
+  #containerAlternateText {
       position: absolute;
       margin: auto;
       width: 100vw;
@@ -546,12 +599,16 @@
       position: absolute;
       width: 100%;
       display: inline-block;
-
       font-family: "Raleway", sans-serif;
       font-size: 80pt;
-
       text-align: center;
-
       user-select: none;
+  }
+  .word {
+    font: normal 'tahoma';
+    text-shadow: 5px 2px #222324, 2px 4px #222324, 3px 5px #222324;
+  }
+  .v-btn-plain > .v-btn__underlay {
+    opacity: 1;
   }
 </style>
